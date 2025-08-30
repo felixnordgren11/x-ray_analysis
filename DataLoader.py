@@ -19,8 +19,6 @@ import re
 
 sns.set_theme()
 
-# ssh felix@wexc006 
-# Define the Gaussian function
 class BeamAnalysis():
 
     def __init__(self):
@@ -377,48 +375,7 @@ class DataLoader():
 
 
 
-'''
-# To get a 2d spot, you can call the function two times, once for x and once for y, and then use the 2d histogram function to get the 2d histogram.
-# For example:
-# Path to data files directory
-data_dir = "angular_analysis/29-03-25/data_files"
-# Get one file from the directory
-files = glob.glob(os.path.join(data_dir, "*.root"))
-if not files:
-    print(f"No .root files found in {data_dir}")
-    exit()
-# Use the first file
-sample_file = files[0]
-print(f"Using file: {sample_file}")
-# Get x and y data from the file
-x_data, x_weights, sim_params = load_data(sample_file, axis='x', interaction='brem')
-y_data, y_weights, _ = DataLoader.load_data(sample_file, axis='y', interaction='brem')
-# Create 2D histogram
-hist_range = [[-0.02, 0.02], [-0.02, 0.02]]  # Range in mm
-nbins = 1000
-bins = [nbins, nbins]  # Number of bins in x and y
-hist, xedges, yedges = np.histogram2d(x_data, y_data, bins=bins, range=hist_range, weights=x_weights)
-hist = hist.T  # Transpose to match correct orientation
-# Create plot
-fig, ax = plt.subplots(figsize=(10, 8))
-extent = [xedges[0], xedges[-1], yedges[0], yedges[-1]]
-# Plot 2D histogram
-im = ax.imshow(hist, extent=extent, origin='lower', aspect='equal', cmap='viridis')
-cbar = plt.colorbar(im, ax=ax, label='Counts')
-# Add title and labels
-title = f"2D Spot - {os.path.basename(sample_file)}"
-subtitle = f"{sim_params['acc_voltage']:.0f}kV, {sim_params['angle']}°, Diamond: {sim_params['diamond_thickness']}μm"
-ax.set_title(f"{title}\n{subtitle}")
-ax.set_xlabel('X Position (mm)')
-ax.set_ylabel('Y Position (mm)')
-lim = 0.002 #mm
-ax.set_xlim(-lim, lim)
-ax.set_ylim(-lim, lim)
-plt.grid(False)
-# Save and show
-plt.tight_layout()
-#plt.savefig(f"2d_spot_{os.path.basename(sample_file).replace('.root', '')}.png", dpi=300)
-plt.show()
-'''
+
+
 
 
